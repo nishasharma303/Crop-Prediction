@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Crop Prediction Model</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+  /* Global Styles */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    /* align-items removed to allow margin-top for centering */
+    min-height: 100vh;
+    background: url('{{ url_for("static", filename="crop.jpg") }}') no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  /* Card Container */
+  .login {
+    background: rgba(255, 255, 255, 0.75); /* more transparent */
+    padding: 30px 40px; /* slightly smaller padding */
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    width: 450px;  /* wider */
+    max-width: 90%;
+    height: auto;  /* shorter height */
+    text-align: center;
+    margin-top: 50px; /* top margin to look centralized */
+  }
+
+  /* Heading */
+  .login h1 {
+    font-size: 2rem;
+    color: #2a6b2f;
+    margin-bottom: 25px;
+    font-weight: 600;
+  }
+
+  /* Inputs */
+  .login input {
+    width: 100%;
+    padding: 14px 18px; /* slightly smaller padding */
+    margin: 8px 0;
+    border: 1px solid #a1d3a2;
+    border-radius: 10px;
+    font-size: 1rem;
+    background: #f6f9f6;
+    transition: border 0.3s ease;
+  }
+
+  .login input:focus {
+    outline: none;
+    border-color: #2a6b2f;
+  }
+
+  /* Button */
+  .login button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 18px;
+    border: none;
+    border-radius: 10px;
+    background-color: #2a6b2f;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .login button:hover {
+    background-color: #1f4f20;
+  }
+
+  /* Prediction text */
+  #predi {
+    margin-top: 25px;
+    font-size: 1.2rem;
+    color: #2a6b2f;
+    min-height: 2rem;
+  }
+</style>
+
+</head>
+
+<body>
+ <div class="login">
+    <h1>Crop Prediction</h1>
+    <form action="{{ url_for('predict')}}" method="post">
+        <input type="text" name="Nitrogen" placeholder="Nitrogen" required />
+        <input type="text" name="Phosphorus" placeholder="Phosphorus" required />
+        <input type="text" name="Potassium" placeholder="Potassium" required />
+        <input type="text" name="temperature" placeholder="Temperature (°C)" required />
+        <input type="text" name="humidity" placeholder="Humidity (%)" required />
+        <input type="text" name="pH" placeholder="pH Level" required />
+        <input type="text" name="rainfall" placeholder="Rainfall (mm)" required />
+
+        <button type="submit">Predict</button>
+    </form>
+
+    <h1 id="predi">{{ prediction_text }}</h1>
+    
+ </div>
+</body>
+</html>
